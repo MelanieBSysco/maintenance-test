@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Maintenance</title>
-
     <style>
+      <style>
       /* =========================
        Minimal CSS Reset
        ========================= */
@@ -72,37 +72,30 @@
         width: 100%;
         max-width: 100%;
       }
-
-      @media (min-width: 992px) {
-        .show-desktop {
-          display: block;
-        }
-        .show-mobile {
-          display: none;
-        }
-      }
-      @media (max-width: 991px) {
-        .show-desktop {
-          display: none;
-        }
-        .show-mobile {
-          display: block;
-        }
-      }
     </style>
   </head>
   <body>
-    <main class="container">
-      <img
-        class="image show-desktop"
-        src="https://raw.githubusercontent.com/MelanieBSysco/maintenance-test/main/fr-content-desktop.png"
-        alt="Maintenance desktop image"
-      />
-      <img
-        class="image show-mobile"
-        src="https://raw.githubusercontent.com/MelanieBSysco/maintenance-test/main/fr-content-mobile.png"
-        alt="Maintenance mobile image"
-      />
-    </main>
+    <div id="js-maintenance-placeholder"></div>
   </body>
+  <script>
+    async function loadExternalHTML() {
+      const url =
+        "https://raw.githubusercontent.com/MelanieBSysco/maintenance-test/main/index-cms.html";
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        const htmlContent = await response.text();
+
+        // Inject the content into a specific div
+        document.getElementById("js-maintenance-placeholder").innerHTML =
+          htmlContent;
+      } catch (error) {
+        console.error("There was a problem fetching the HTML:", error);
+      }
+    }
+
+    loadExternalHTML();
+  </script>
 </html>
